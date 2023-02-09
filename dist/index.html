@@ -10,17 +10,39 @@
 </head>
 <body>
 
+   
+        <div class="container">
+        <div class="input-container">
+            <span id="status"></span>
+        </div>
+          <div class="barra">
+            <div></div>
+          </div>
+          <span id="vida"></span>
+          <img src="media/dragon.webp" alt="" width="20%" height="20%">
+          <span id="resultado"></span>
+          <button id="smite" style="padding: 0; display: flex;"><img src="media/smiteIcon.png" height="50px" width="50px" ></button>
+          <button type="button" onclick="Mudarestado();" style="margin: 3%;">Abrir configurações</button>
+          
 
-<div>
-    <div class="barra">
-        <div></div>
-    </div>
-    <span id="vida"></span><br>
-    <span id="resultado"></span><br>
-    <button id="smite">SMITAR</button><br>
-</div>
+          <div id="configScreen">
+            <div class="input-container">
+                <p>Dano do smite</p>
+                <input type="text" id="dano" onkeypress="return onlynumber();">
+                <p>Vida maxima</p>
+                <input type="text" id="vidaInput" onkeypress="return onlynumber();">
+                <button style="margin-top: 3%; width: 95%;" onclick="config()">Aplicar</button>
+            </div>
+        </div>
+
+        </div>
+  
 
 
+      
+
+      
+      
 
 
         

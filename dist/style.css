@@ -1,20 +1,48 @@
-body{
-    margin: 0;
-    height: 100vh;
+.container {
     display: flex;
-    justify-content: center;
     align-items: center;
-}
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column;
+  }
+  
+  #vida, #resultado {
+    margin-bottom: 25px;
+  }
+
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .input-container input {
+    margin-right: 10px;
+  }
 
 .barra{
     width: 300px;
     height: 20px;
-    border-radius: 10px;
+    border-style: solid;
+    border-width: 3px;
     background-color: #ccc;
 }
 
 .barra div{
     height: 100%;
-    border-radius: 10px;
-    background-color: #222;
+
+    background-color: rgb(6, 167, 6);
 }
+
+#configScreen {
+    opacity: 0;
+    transition: opacity 1.5s;
+  }
+  
+  #configScreen.mostrar {
+    opacity: 1;
+  }
+
+  body{
+    background-color: rgb(207, 206, 206);
+  }

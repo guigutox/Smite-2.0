@@ -1,8 +1,14 @@
-let initialLife: number = 2000;
+
+
+
+let initialLife: number = Number(localStorage.getItem("vidaAtt"))||3000;
+console.log(initialLife);
+let dano:number = Number(localStorage.getItem("danoAtt"))||200;
+
 let life:number = initialLife;
-const dano:number = 200;
-const minTick:number = 100;
-const maxTick:number = 300;
+
+const minTick:number = 200;
+const maxTick:number = 600;
 let minTime:number = 400;
 let maxTime:number = 400;
 
@@ -15,11 +21,17 @@ const getTick = (): number =>{
     return Math.round(Math.random() * (maxTick-minTick)+minTick);
 }
 
+
+
+
+
 var timeRate:number = getTime();
 const timerSpan = document.getElementById("vida");
 const resultadoSpan = document.getElementById("resultado");
 const smite = document.getElementById("smite");
 const progresso = document.querySelector(".barra div");
+const smiteSoud = new Audio('./media/smiteSFX.ogg');
+const stats = document.getElementById("status");
 
 if(timerSpan == null) 
 throw new Error("TIMER SPAN ERRO");
@@ -27,18 +39,25 @@ throw new Error("TIMER SPAN ERRO");
 if(resultadoSpan == null)
 throw new Error("Resultado SPAN ERRO");
 
+if(stats == null) 
+throw new Error("Status SPAN ERRO");
+
+stats.textContent = `Vida maxima: ${initialLife} // Dano do Smite: ${dano}`;
+
 
 
 
 smite?.addEventListener("click", function(){
 
-        
+    smiteSoud.play();
 
     if(dano >= life){
+        resultadoSpan.setAttribute("style", " color: green; ")
         resultadoSpan!.textContent = "Voce acertou o smite";
         (document.getElementById("smite") as HTMLButtonElement).disabled = true;
         clearInterval(idInterval);
     }else{
+        resultadoSpan.setAttribute("style", " color: red; ")
         resultadoSpan!.textContent = "Voce errou o smite";
         (document.getElementById("smite") as HTMLButtonElement).disabled = true;
         clearInterval(idInterval);
@@ -50,12 +69,11 @@ smite?.addEventListener("click", function(){
 
 var idInterval = setInterval(function(){
 
-
     var tickRate: number = getTick();
     if(tickRate > life || life < 0){
         clearInterval(idInterval);
         console.log(life);
-        timerSpan.textContent = String(life);
+        timerSpan.textContent = "VIDA: "+String(life);
         (document.getElementById("smite") as HTMLButtonElement).disabled = true;
         life = 0;
         progresso?.setAttribute("style",`width: ${0}%`);
@@ -63,15 +81,40 @@ var idInterval = setInterval(function(){
     }else{
         life = life - tickRate;
         let x = (life/initialLife)*100;
-
         progresso?.setAttribute("style",`width: ${x}%`);
         console.log(life);
-        timerSpan.textContent = String(life);
+        timerSpan.textContent = "VIDA: "+String(life);
     }
 
 
 
 }, timeRate);
 
+function config(){
+    
+    let danoAtt = (document.getElementById("dano") as HTMLInputElement);
+    let vidaAtt = (document.getElementById("vidaInput") as HTMLInputElement);
+    
+        localStorage.setItem("danoAtt", danoAtt.value);
+        localStorage.setItem("vidaAtt", vidaAtt.value);
+}
 
 
+function Mudarestado() {
+    let config = document.getElementById("configScreen");
+    if(config == null)
+    throw new Error("Config screen ERRO");
+    config.classList.toggle('mostrar');
+  }
+
+  function onlynumber(evt : any) {
+    var theEvent = evt || window.event;
+    var key = theEvent.keyCode || theEvent.which;
+    key = String.fromCharCode( key );
+    //var regex = /^[0-9.,]+$/;
+    var regex = /^[0-9.]+$/;
+    if( !regex.test(key) ) {
+       theEvent.returnValue = false;
+       if(theEvent.preventDefault) theEvent.preventDefault();
+    }
+ }
