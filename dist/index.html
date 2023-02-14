@@ -8,7 +8,7 @@
     <script src="js/index.js" defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onload="exibirImagem()">
 
    
         <div class="container">
@@ -19,9 +19,12 @@
             <div></div>
           </div>
           <span id="vida"></span>
-          <img src="media/dragon.webp" alt="" width="20%" height="20%">
+          <img id="imagem" alt="" width="20%" height="20%">
+          
+          <button id="smite" style="padding: 0; display: flex; margin-top: 1.5%;"><img src="media/smiteIcon.png" height="50px" width="50px" ></button>
           <span id="resultado"></span>
-          <button id="smite" style="padding: 0; display: flex;"><img src="media/smiteIcon.png" height="50px" width="50px" ></button>
+          <button onclick="reset()" style="margin-top: 0.5%;">Reset</button>
+          
           <button type="button" onclick="Mudarestado();" style="margin: 3%;">Abrir configurações</button>
           
 

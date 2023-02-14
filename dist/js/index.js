@@ -7,6 +7,30 @@ const minTick = 200;
 const maxTick = 600;
 let minTime = 400;
 let maxTime = 400;
+var imagens = [
+    { id: 1, img: './media/chentech_drake.webp' },
+    { id: 2, img: './media/cloud_drake.webp' },
+    { id: 3, img: './media/elder_drake.webp' },
+    { id: 4, img: './media/hex_drake.webp' },
+    { id: 5, img: './media/dragon.webp' }
+];
+function exibirImagem() {
+    // Obter um índice aleatório da matriz de imagens
+    const indiceAleatorio = Math.floor(Math.random() * imagens.length);
+    // Obter a imagem correspondente ao índice aleatório
+    const imagem = imagens[indiceAleatorio];
+    // Criar um novo elemento de imagem e definir seu atributo de origem
+    const elementoImagem = document.createElement('img');
+    elementoImagem.src = imagem.img;
+    elementoImagem.style.width = "20%";
+    elementoImagem.style.height = "20%";
+    // Obter o elemento de destino e anexar a imagem a ele
+    const elementoDestino = document.getElementById("imagem");
+    elementoDestino.parentNode.replaceChild(elementoImagem, elementoDestino);
+}
+const getImageId = () => {
+    return Math.random() * (6 - 1) + 1;
+};
 const getTime = () => {
     return Math.round(Math.random() * (maxTime - minTime) + minTime);
 };
@@ -52,6 +76,7 @@ var idInterval = setInterval(function () {
         document.getElementById("smite").disabled = true;
         life = 0;
         progresso === null || progresso === void 0 ? void 0 : progresso.setAttribute("style", `width: ${0}%`);
+        resultadoSpan.setAttribute("style", " color: red; ");
         resultadoSpan.textContent = "Voce errou o smite";
     }
     else {
@@ -67,6 +92,10 @@ function config() {
     let vidaAtt = document.getElementById("vidaInput");
     localStorage.setItem("danoAtt", danoAtt.value);
     localStorage.setItem("vidaAtt", vidaAtt.value);
+    reset();
+}
+function reset() {
+    location.reload();
 }
 function Mudarestado() {
     let config = document.getElementById("configScreen");
